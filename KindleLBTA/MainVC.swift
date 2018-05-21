@@ -24,16 +24,15 @@ class MainVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 86
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! BookCell
         
         let book = self.books?[indexPath.row]
+        cell.book = book
         
-        cell.textLabel?.text = book?.title
-        cell.imageView?.image = book?.image
         return cell
     }
     
