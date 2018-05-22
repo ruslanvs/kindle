@@ -23,6 +23,19 @@ class MainVC: UITableViewController {
         setupBooks()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedBook = self.books?[indexPath.row]
+        
+        let layout = UICollectionViewFlowLayout()
+        let bookPageController = BookPageController(collectionViewLayout: layout)
+        
+        bookPageController.book = selectedBook
+        
+        let navigationController = UINavigationController(rootViewController: bookPageController)
+        present(navigationController, animated: true, completion: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 86
     }
@@ -50,10 +63,10 @@ class MainVC: UITableViewController {
         let book = Book(title: "Steeve Jobs", author: "Walter Isaacson", image: #imageLiteral(resourceName: "steeveJobs"), pages: pages)
         
         let book2 = Book(title: "Bill Gates: A Biography", author: "Michael Beacraft", image: #imageLiteral(resourceName: "billGates"), pages: [
-            Page(number: 1, text: "Text for page 1"),
-            Page(number: 2, text: "Text for page 2"),
-            Page(number: 3, text: "Text for page 3"),
-            Page(number: 4, text: "Text for page 4")
+            Page(number: 1, text: "Bill Gates Text for page 1"),
+            Page(number: 2, text: "Bill Gates Text for page 2"),
+            Page(number: 3, text: "Bill Gates Text for page 3"),
+            Page(number: 4, text: "Bill Gates Text for page 4")
             ])
         
         self.books = [book, book2]

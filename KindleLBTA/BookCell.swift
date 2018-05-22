@@ -41,7 +41,6 @@ class BookCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        print("cell is being initialized")
         
         addSubview(coverImageView)
         coverImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
