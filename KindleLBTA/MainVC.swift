@@ -45,9 +45,10 @@ class MainVC: UITableViewController {
         segmentedControl.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
         
         let gridButton = UIButton(type: .system)
-        gridButton.setImage(#imageLiteral(resourceName: "icons8-grid-filled-90"), for: .normal)
+        gridButton.setImage(#imageLiteral(resourceName: "icons8-grid-filled-50"), for: .normal)
         gridButton.tintColor = .white
         gridButton.translatesAutoresizingMaskIntoConstraints = false
+        gridButton.addTarget(self, action: #selector(footerButtonPressed), for: .touchUpInside)
         footerView.addSubview(gridButton)
         
         gridButton.leftAnchor.constraint(equalTo: footerView.leftAnchor, constant: 8).isActive = true
@@ -56,9 +57,10 @@ class MainVC: UITableViewController {
         gridButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
         
         let sortButton = UIButton(type: .system)
-        sortButton.setImage(#imageLiteral(resourceName: "icons8-up-down-arrow-90"), for: .normal)
+        sortButton.setImage(#imageLiteral(resourceName: "icons8-up-down-arrow-50"), for: .normal)
         sortButton.tintColor = .white
         sortButton.translatesAutoresizingMaskIntoConstraints = false
+        sortButton.addTarget(self, action: #selector(footerButtonPressed), for: .touchUpInside)
         footerView.addSubview(sortButton)
         
         sortButton.rightAnchor.constraint(equalTo: footerView.rightAnchor, constant: -8).isActive = true
@@ -74,11 +76,17 @@ class MainVC: UITableViewController {
         return 50
     }
     
+    @objc func footerButtonPressed( sender: UIButton ){
+        print("Footer button pressed")
+    }
+    
     func setupNavBarButtons(){
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-90").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector (handleMenuPressed))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "icons8-menu-filled-50").withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector (handleMenuPressed))
+        navigationItem.leftBarButtonItem?.tintColor = .white
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-90").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector (handleMenuPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-menu-filled-50").withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector (handleMenuPressed))
+        navigationItem.rightBarButtonItem?.tintColor = .white
         
     }
     
