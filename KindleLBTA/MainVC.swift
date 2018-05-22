@@ -20,7 +20,7 @@ class MainVC: UITableViewController {
         
         navigationItem.title = "Kindle"
         
-        setupBooks()
+        fetchBooks()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -34,6 +34,41 @@ class MainVC: UITableViewController {
         
         let navigationController = UINavigationController(rootViewController: bookPageController)
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    func fetchBooks() {
+        
+        if let url = URL(string: "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/kindle.json") {
+
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                if let err = error {
+                    print("Failed to fetch external json books: ", err)
+                    return
+                }
+                
+                guard let data = data else {return}
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+
+                    guard let bookDictionaries = json as? [[String: Any]] else {return}
+                    
+                    self.books = []
+                    for bookDictionary in bookDictionaries {
+                        
+                        let book = Book(dictionary: bookDictionary)
+                        self.books?.append(book)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    
+                } catch let jsonError {
+                    print("Failed to parse json", jsonError)
+                }
+                
+            }).resume()
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -52,24 +87,5 @@ class MainVC: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = books?.count else {return 0}
         return count
-    }
-    
-    func setupBooks(){
-        let page1 = Page(number: 1, text: "Text for the first page")
-        let page2 = Page(number: 2, text: "Text for the second page")
-        
-        let pages = [page1, page2]
-        
-        let book = Book(title: "Steeve Jobs", author: "Walter Isaacson", image: #imageLiteral(resourceName: "steeveJobs"), pages: pages)
-        
-        let book2 = Book(title: "Bill Gates: A Biography", author: "Michael Beacraft", image: #imageLiteral(resourceName: "billGates"), pages: [
-            Page(number: 1, text: "Bill Gates Text for page 1"),
-            Page(number: 2, text: "Bill Gates Text for page 2"),
-            Page(number: 3, text: "Bill Gates Text for page 3"),
-            Page(number: 4, text: "Bill Gates Text for page 4")
-            ])
-        
-        self.books = [book, book2]
-        
     }
 }

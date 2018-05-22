@@ -18,7 +18,7 @@ class PageCell: UICollectionViewCell {
     
     private let textLabel: UILabel = {
         let label = UILabel()
-        label.text = "SOME TEXT FOR asdfad ad asdf adsff adsf ada LABEL"
+        label.text = "Placeholder text"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
