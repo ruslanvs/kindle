@@ -40,20 +40,17 @@ class BookCell: UITableViewCell {
     private let coverImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "steeveJobs")
         return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "title book in ceasdfasdfad adf ads ad asd ll text"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let authorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Author label adf adf ad af adf d ad d das sd a s"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

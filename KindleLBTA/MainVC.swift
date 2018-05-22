@@ -54,7 +54,6 @@ class MainVC: UITableViewController {
                     
                     self.books = []
                     for bookDictionary in bookDictionaries {
-                        
                         let book = Book(dictionary: bookDictionary)
                         self.books?.append(book)
                     }
